@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.mappy.map.MappyMapFragment"
+        android:id="@+id/sample_geojson_map_fragment" />
+
+    <Button
+        android:id="@+id/sample_geojson_load_linestring"
+        android:text="@string/action_load_geojson_linestring"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:id="@+id/sample_geojson_load_polygon"
+        android:text="@string/action_load_geojson_polygon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/sample_geojson_load_linestring"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:id="@+id/sample_geojson_load_point"
+        android:text="@string/action_load_geojson_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/sample_geojson_load_polygon"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:id="@+id/sample_geojson_clear"
+        android:text="@string/action_clear_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>

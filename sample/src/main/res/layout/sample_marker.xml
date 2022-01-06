@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/sample_marker_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Presser longuement la carte :"
+        android:padding="5dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/sample_marker_mapFragment"
+            android:name="com.mappy.map.MappyMapFragment" />
+
+        <Button
+            android:id="@+id/sample_marker_reinitialize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Réinitialiser"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</LinearLayout>

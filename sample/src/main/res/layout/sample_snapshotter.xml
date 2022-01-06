@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/sample_snapshot_latitude"
+            android:layout_width="200dp"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="48.828999"
+            android:hint="Latitude" />
+
+        <EditText
+            android:id="@+id/sample_snapshot_longitude"
+            android:layout_width="200dp"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="2.230758"
+            android:hint="Longitude" />
+
+        <EditText
+            android:id="@+id/sample_snapshot_zoom"
+            android:layout_width="200dp"
+            android:inputType="numberDecimal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="15"
+            android:hint="Zoom Level" />
+
+        <Button
+            android:id="@+id/sample_snapshot_validate"
+            android:layout_width="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:text="Valider" />
+
+        <RelativeLayout
+            android:id="@+id/sample_snapshot_container"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_margin="10dp"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/sample_snapshot_snapshot"
+                android:layout_width="match_parent"
+                android:scaleType="matrix"
+                android:layout_height="400dp" />
+
+            <View
+                android:id="@+id/sample_snapshot_marker_anchor"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:id="@+id/sample_snapshot_marker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@id/sample_snapshot_marker_anchor"
+                android:src="@drawable/map_marker_empty" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

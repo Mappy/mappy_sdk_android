@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="MappyTheme" parent="android:Theme.Holo.Light.DarkActionBar" />
+
+    <declare-styleable name="PaddingSeekBar">
+        <attr name="absoluteMinValue" format="integer|float" />
+        <attr name="absoluteMaxValue" format="integer|float" />
+        <attr name="singleThumb" format="boolean" />
+    </declare-styleable>
+
+    <style name="MappyTheme.UserLocationLayer" parent="mapbox_LocationComponent">
+        <item name="mapbox_backgroundDrawable">@drawable/user_location_empty</item>
+        <item name="mapbox_foregroundDrawable">@drawable/user_location_empty</item>
+        <item name="mapbox_bearingDrawable">@drawable/user_location_sample_marker_bearing_blue
+        </item>
+
+        <item name="mapbox_accuracyAlpha">0.15</item>
+        <item name="mapbox_accuracyColor">@color/sample_user_location_accuracy_color</item>
+    </style>
+
+</resources>

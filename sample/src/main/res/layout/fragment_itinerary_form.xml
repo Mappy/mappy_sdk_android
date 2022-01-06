@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:showIn="@layout/sample_route_text">
+
+        <TextView
+            android:id="@+id/fragment_itinerary_form_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:padding="10dip"
+            android:text="Sample pour afficher un itinéraire sur la carte" />
+
+        <EditText
+            android:id="@+id/fragment_itinerary_form_departure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:clickable="true"
+            android:editable="false"
+            android:ellipsize="none"
+            android:hint="@string/label_depart"
+            android:inputType="none"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/fragment_itinerary_form_arrival"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:clickable="true"
+            android:editable="false"
+            android:ellipsize="none"
+            android:hint="@string/label_arrivee"
+            android:inputType="none"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/fragment_itinerary_form_slider_transport_modes_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/fragment_itinerary_form_mapFragment"
+                android:name="com.mappy.map.MappyMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/fragment_itinerary_form_routes_text_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#C0FFFFFF"
+                android:textColor="@android:color/black" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_itinerary_form_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>

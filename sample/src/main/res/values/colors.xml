@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sample_panoramic_background">#80E2E2E2</color>
+
+    <color name="sample_polyline_brest_bucarest">#00346B</color>
+    <color name="sample_polyline_paris_marseille">#00846B</color>
+    <color name="sample_polyline_paris_01_fill">#00846B</color>
+    <color name="sample_polyline_paris_01_stroke">#ffffffff</color>
+
+    <color name="sample_geojson_simple_polygon_fill">#00C18C</color>
+    <color name="sample_geojson_simple_polygon_stroke">#000000</color>
+    <color name="sample_geojson_simple_polyline_color">#8080FF</color>
+
+    <color name="sample_padding_transparent">#80bb0000</color>
+    <color name="sample_padding">#ffbb0000</color>
+
+    <color name="sample_custom_popup_background">#8fEFAE00</color>
+    <color name="sample_custom_popup_text_color">#ffFF0000</color>
+
+    <color name="sample_map_not_ready_color">#bb0000</color>
+    <color name="sample_map_ready_color">#00bb00</color>
+
+    <color name="sample_user_location_accuracy_color">#FF90C02B</color>
+</resources>

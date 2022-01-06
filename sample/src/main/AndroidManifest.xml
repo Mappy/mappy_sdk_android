@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.mappy.sdk.sample">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".MappySampleApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="false"
+        android:hardwareAccelerated="true"
+        android:theme="@style/MappyTheme"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        tools:replace="android:supportsRtl,android:appComponentFactory">
+        <meta-data
+            android:name="com.mappy.client_id"
+            android:value="@string/mappy_sdk_client_id" />
+
+        <activity
+            android:name=".SamplePickerActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".DebugMenu" />
+        <activity android:name=".HelloMapSample" />
+        <activity android:name=".MapUpdateSample" />
+        <activity android:name=".MapStyleSample" />
+        <activity
+            android:name=".CopyrightsSample"
+            android:label="Copyrights"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".LogoAndScaleSample"
+            android:label="Logo and Scale"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity android:name=".UserExternalGoogleLocationSample" />
+        <activity android:name=".UserExternalMappyLocationSample" />
+        <activity android:name=".MarkerSample" />
+        <activity android:name=".MarkerZOrderSample" />
+        <activity android:name=".PolylineAndPolygonSample" />
+        <activity android:name=".StylePolylineSample" />
+        <activity
+            android:name=".CustomStylePolylineSample"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity android:name=".GeoJsonSample" />
+        <activity android:name=".PaddingSample" />
+        <activity android:name=".MultiPathRouteWithLatLngSample" />
+        <activity android:name=".MultiPathRouteWithTextSample" />
+        <activity android:name=".SimpleRouteWithLatLngSample" />
+        <activity
+            android:name=".SearchSample"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity android:name=".GeocodeSample" />
+        <activity android:name=".PanoramicOutdoorSample" />
+        <activity android:name=".FPSCounter" />
+        <activity android:name=".BackgroundPOISample" />
+        <activity android:name=".OpenGPSByIntent" />
+
+        <activity android:name=".SDKInfos" />
+        <activity android:name=".SnapShotterSample" />
+        <activity android:name=".UserLocationSample" />
+        <activity android:name=".EarlyInitSample" />
+        <activity android:name=".MarkerOffsetSample" />
+        <activity android:name=".MarkerOpacitySample" />
+    </application>
+
+</manifest>

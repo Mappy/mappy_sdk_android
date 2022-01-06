@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mappy.panoramic.PanoramicView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panoramic_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/sample_panoramic_background"
+        android:layout_alignParentBottom="true">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/panoramic_preview_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:id="@+id/panoramic_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp" />
+
+    </LinearLayout>
+
+</com.mappy.panoramic.PanoramicView>

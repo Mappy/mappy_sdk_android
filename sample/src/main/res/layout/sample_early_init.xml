@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sample_early_init_open_map"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="12dp"
+        android:text="@string/action_display_map" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sample_early_init_map_status"
+        android:layout_below="@id/sample_early_init_open_map"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="12dp"
+        android:text="@string/status_map_not_ready"
+        android:textColor="@color/sample_map_not_ready_color" />
+
+    <FrameLayout
+        android:id="@+id/sample_early_init_map_pixel"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

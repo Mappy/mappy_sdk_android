@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/sample_picker_item_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/sample_item_new"
+        android:contentDescription="New" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/sample_picker_item_new"
+        android:layout_toStartOf="@id/sample_picker_item_new"
+        android:orientation="vertical"
+        android:padding="5dip">
+
+        <TextView
+            android:id="@+id/sample_picker_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#333"
+            tools:text="Hello Sample" />
+
+        <TextView
+            android:id="@+id/sample_picker_item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="2dip"
+            android:textSize="14sp"
+            android:textColor="#999"
+            tools:text="Description du sample" />
+    </LinearLayout>
+</RelativeLayout>

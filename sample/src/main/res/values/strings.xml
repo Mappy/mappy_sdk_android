@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mappy SDK v6</string>
+
+    <string name="mappy_sdk_client_id">MappySamples</string>
+
+    <string name="label_depart">Départ</string>
+    <string name="label_arrivee">Arrivée</string>
+
+    <string name="loading">Chargement…</string>
+    <string name="action_load_polylines">Charger itinéraires</string>
+    <string name="action_load_polylines_with_anim">Charger animation itinéraires</string>
+    <string name="action_load_polygons">Charger polygon</string>
+    <string name="action_load_geojson_point">GeoJson Point</string>
+    <string name="action_load_geojson_polygon">GeoJson Polygon</string>
+    <string name="action_load_geojson_linestring">GeoJson LineString</string>
+    <string name="action_clear_map">Effacer</string>
+    <string name="action_display_map">Afficher la carte</string>
+    <string name="status_map_not_ready">Initialisation en cours…</string>
+    <string name="status_map_ready">Carte prête !</string>
+
+    <string name="sample_padding_min"></string>
+    <string name="sample_padding_max"></string>
+
+    <string name="error_network_not_enabled">"Réseau indisponible, impossible d'accéder au service"</string>
+    <string name="family_prompt">Famille</string>
+    <string name="solid">SOLID</string>
+    <string name="dashed">DASHED</string>
+    <string name="dash">dash</string>
+    <string name="dot">DOT</string>
+    <string name="dot_no_interpolated">DOT NO INTERPOLATED</string>
+    <string name="dot_mapbox">DOT MAPBOX</string>
+    <string name="validate">Validate</string>
+    <string name="gap">gap</string>
+    <string name="animation">Animation</string>
+</resources>

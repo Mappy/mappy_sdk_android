@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".GeocodeSample">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip">
+
+            <TextView
+                android:id="@+id/sample_geocode_address_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saisissez une Adresse :"
+                android:layout_marginLeft="10dip"
+                android:layout_marginStart="10dip" />
+
+            <Button
+                android:id="@+id/sample_geocode_address_validate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sample_geocode_address_label"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:text="Chercher" />
+
+            <EditText
+                android:id="@+id/sample_geocode_address_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sample_geocode_address_label"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@id/sample_geocode_address_validate"
+                android:layout_toStartOf="@id/sample_geocode_address_validate"
+                android:layout_alignTop="@id/sample_geocode_address_validate"
+                android:layout_alignBottom="@id/sample_geocode_address_validate"
+                android:singleLine="true"
+                android:text="9 rue Maurice Mallet, 92130 Issy-les-Moulineaux"
+                android:hint="9 rue Maurice Mallet, 92130 Issy-les-Moulineaux" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:layout_marginLeft="20dip"
+            android:layout_marginBottom="10dip"
+            android:layout_marginRight="20dip">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@android:color/darker_gray"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/white"
+                android:textSize="20sp"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:text="OU" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip">
+
+            <TextView
+                android:id="@+id/sample_geocode_map_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appuyer longuement la carte :"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip" />
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:layout_below="@id/sample_geocode_map_label"
+                android:id="@+id/sample_geocode_map_fragment"
+                android:name="com.mappy.map.MappyMapFragment" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@android:color/darker_gray"
+            android:layout_margin="10dip" />
+
+        <TextView
+            android:id="@+id/sample_geocode_result_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Résultat :"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip" />
+
+        <TextView
+            android:id="@+id/sample_geocode_result_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:hint="adresse" />
+
+        <TextView
+            android:id="@+id/sample_geocode_result_coordinates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:hint="coordonnées" />
+    </LinearLayout>
+</ScrollView>

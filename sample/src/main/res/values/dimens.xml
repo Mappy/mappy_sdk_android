@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="itinerary_vehicle">48dp</dimen>
+    <dimen name="itinerary_vehicle_padding">10dp</dimen>
+
+    <dimen name="margin_custom_popup_lines">4dp</dimen>
+    <dimen name="margin_custom_popup_icons">6dp</dimen>
+
+    <dimen name="marker_content_size">28dp</dimen>
+
+    <dimen name="padding_sample_default_padding">0dip</dimen>
+    <dimen name="map_update_sample_padding">20dip</dimen>
+</resources>
