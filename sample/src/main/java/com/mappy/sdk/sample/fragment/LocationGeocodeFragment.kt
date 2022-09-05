@@ -141,10 +141,10 @@ class LocationGeocodeFragment : Fragment() {
 
             val params = GetLocationByQueryRequest.Params(
                 query,
-                geobounds,
-                true,
-                true,
-                GetLocationByQueryRequest.POI_XOR_ADDRESS
+                geobounds ?: GeoBounds(),
+                extendsBoundingBox = true,
+                isForRoute = true,
+                filter = GetLocationByQueryRequest.POI_XOR_ADDRESS
             )
             MappyDownloadManager.getLocationByQuery(
                 params,

@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 7.1.3
+
+Updated Mappy Map SDK, Services and commons.
+MapStyle is now deprecated. Use VisualOptions instead.
+
 ## Version 7.1.2
 
 Update Mappy Map SDK

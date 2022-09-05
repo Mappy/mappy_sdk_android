@@ -34,4 +34,7 @@
     <string name="validate">Validate</string>
     <string name="gap">gap</string>
     <string name="animation">Animation</string>
+
+    <string name="theme_prompt">Theme</string>
+    <string name="layer_prompt">Layer</string>
 </resources>

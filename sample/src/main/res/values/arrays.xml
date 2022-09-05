@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="family_arrays">
+    <string-array name="theme_arrays">
         <item>DEFAULT</item>
+        <item>SIMPLE</item>
+        <item>NATURE</item>
+        <item>NIGHT</item>
+        <item>SATELLITE</item>
         <item>MAAS_IDF</item>
+    </string-array>
+
+    <string-array name="layer_arrays">
+        <item>NEUTRAL</item>
+        <item>TRAFFIC</item>
+        <item>CRITAIR</item>
+        <item>BICYCLE</item>
+        <item>TRANSPORTS</item>
+        <item>GPS</item>
     </string-array>
 </resources>

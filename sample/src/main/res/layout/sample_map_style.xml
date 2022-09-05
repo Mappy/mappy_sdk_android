@@ -2,49 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@android:color/white">
 
     <Spinner
-        android:id="@+id/sample_map_family"
+        android:id="@+id/sample_map_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/family_arrays"
-        android:prompt="@string/family_prompt" />
+        android:entries="@array/theme_arrays"
+        android:prompt="@string/theme_prompt" />
 
-    <LinearLayout
+    <Spinner
+        android:id="@+id/sample_map_layer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/sample_map_style_photo_toggle"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="Photo"
-            android:singleLine="true"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/sample_map_style_traffic_toggle"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="Traffic OFF"
-            android:singleLine="true"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/sample_map_style_transport_toggle"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="TC OFF"
-            android:singleLine="true"
-            android:textAllCaps="false" />
-    </LinearLayout>
+        android:entries="@array/layer_arrays"
+        android:prompt="@string/layer_prompt" />
 
     <fragment
         android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import com.mappy.common.model.GeoBounds
 import com.mappy.common.model.GeoConstants
 import com.mappy.common.model.LatLng
 import com.mappy.map.MapController
@@ -99,10 +100,10 @@ class GeocodeSample : FragmentActivity(), View.OnClickListener,
         val queriedAddress = addressInput.text.toString()
         val params = GetLocationByQueryRequest.Params(
             queriedAddress,
-            mapController.boundingBox,
-            true,
-            false,
-            GetLocationByQueryRequest.ADDRESS
+            mapController.boundingBox ?: GeoBounds(),
+            extendsBoundingBox = true,
+            isForRoute = false,
+            filter = GetLocationByQueryRequest.ADDRESS
         )
         MappyDownloadManager.getLocationByQuery(params, requestListener)
     }
