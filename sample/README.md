@@ -15,7 +15,7 @@ It shows how you can deal with the map and the services which is used to request
 
 # Foreword
 
-If you have not read the main readme, please read it [here](../README.md)
+If you have not read the main readme, please read it [here](../../core_libs/mappy-sdk/README.md)
 
 
 ## Main features
@@ -38,7 +38,7 @@ Mappy SDK provides access to Mappy Map and geographic Web services. These includ
 
 ## Include mappysdk in your project
 
-Use a Maven repository and add `implementation 'com.mappy:mappysdk:6.+'` to your `build.gradle` (See [Access Mappy Maven Repository](../README.md#access-mappy-maven-repository)).
+Use a Maven repository and add `implementation 'com.mappy:mappysdk:6.+'` to your `build.gradle` (See [Access Mappy Maven Repository](../../core_libs/mappy-sdk/README.md#access-mappy-maven-repository)).
 
 Add in your build.gradle the credentials like in sample 
 
@@ -189,7 +189,7 @@ It is based on the [Rx](https://github.com/ReactiveX/RxJava/blob/3.x/README.md) 
 
 ### MappyRouteRequestBuilder :
 
-To help you deal with the mappy route API, an utilitarian class is available. `com.mappy.services.utils.MappyRouteRequestBuilder` is a factory requesting all the services for itinerary using only one mode : car, bike or pedestrian.
+To help you deal with the mappy route API, an utilitarian class is available. `MappyRouteRequestBuilder` is a factory requesting all the services for itinerary using only one mode : car, bike or pedestrian.
 
 ```kotlin
     MappyRouteRequestBuilder.withContext(context)
@@ -217,7 +217,7 @@ If you want the detail of all services available in the Mappy SDK, you will find
 
 # Get Native library symbol files
 ----------
-Use your access to Maven repository (See [Access Mappy Maven Repository](../README.md#access-mappy-maven-repository)) to download the symbol files:
+Use your access to Maven repository (See [Access Mappy Maven Repository](../../core_libs/mappy-sdk/README.md#access-mappy-maven-repository)) to download the symbol files:
 
 ```
     http://sdkandroid.mappy.net/symbols/{version}/armeabi-v7a.zip

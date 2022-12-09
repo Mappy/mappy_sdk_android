@@ -59,4 +59,4 @@ Mappy SDK requires your app to identify itself on our servers. In `AndroidManife
 
 ## Advanced
 
-If you want the detail of all available services in the Mappy SDK, you will find it in the [Readme](sample/README.md)
+If you want the detail of all available services in the Mappy SDK, you will find it in the [Readme](../samples/mappy_sdk_sample/README.md)

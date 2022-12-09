@@ -37,7 +37,7 @@ Update the Android target version to API 30
 
 ## Version 6.2010.0 (2020/02/25)
 
-    - `com.mappy.utils.IntentUtil.canOpenIntent` is not annotated `@JvmStatic` anymore.
+    - `IntentUtil.canOpenIntent` is not annotated `@JvmStatic` anymore.
     - add InfoWindow display on MappyMarker tap event. See MarkerSampleActivity to learn how to deal with it.
 
 

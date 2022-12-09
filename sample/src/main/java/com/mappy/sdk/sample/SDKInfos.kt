@@ -3,7 +3,7 @@ package com.mappy.sdk.sample
 import android.app.ListActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import com.mappy.BuildConfig
+import com.mappy.sdk.sample.BuildConfig.VERSION_NAME
 import com.mappy.services.utils.PlatformConfig
 
 /**
@@ -14,7 +14,7 @@ class SDKInfos : ListActivity() {
         super.onCreate(savedInstanceState)
 
         val stringList = arrayOf(
-            "SDK_VERSION=" + BuildConfig.VERSION_NAME,
+            "SDK_VERSION=" + VERSION_NAME,
             "UrlLocationByCoordinate:" + PlatformConfig.urlLocationByCoordinate,
             "UrlLocationByQuery:" + PlatformConfig.urlLocationByQuery,
             "UrlPanoramic:" + PlatformConfig.urlPanoramic,
