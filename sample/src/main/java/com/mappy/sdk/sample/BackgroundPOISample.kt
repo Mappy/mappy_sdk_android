@@ -54,6 +54,7 @@ class BackgroundPOISample : FragmentActivity() {
             }
 
             override fun onPostMapClick(point: LatLng, backgroundPOI: BackgroundPOI?) = false
+            override fun onMapClickConsumed() {}
 
             override fun isNotSimpleTouch(isMarkerTouch: Boolean) {}
         })
