@@ -13,10 +13,10 @@ import com.mappy.map.MapController
 import com.mappy.map.MappyMapFragment
 import com.mappy.sdk.sample.utils.AddressUtil
 import com.mappy.sdk.sample.utils.ProgressDialogHelper
-import com.mappy.services.MappyDownloadManager
-import com.mappy.services.RequestListener
-import com.mappy.services.requests.GetLocationByCoordinatesRequest
-import com.mappy.services.requests.GetLocationByQueryRequest
+import com.mappy.legacy.MappyDownloadManager
+import com.mappy.legacy.RequestListener
+import com.mappy.legacy.requests.GetLocationByCoordinatesRequest
+import com.mappy.legacy.requests.GetLocationByQueryRequest
 import com.mappy.utils.ConnectivityUtil
 import com.mappy.webservices.resource.model.dao.MappyLocation
 import com.mappy.webservices.resource.store.LocationStore

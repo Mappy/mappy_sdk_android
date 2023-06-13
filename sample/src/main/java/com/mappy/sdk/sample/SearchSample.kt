@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mappy.common.model.GeoConstants
 import com.mappy.sdk.sample.utils.AddressUtil
-import com.mappy.services.MappyDownloadManager
-import com.mappy.services.requests.GetLocationByQueryRequest
-import com.mappy.services.requests.SuggestionsRequest
+import com.mappy.legacy.MappyDownloadManager
+import com.mappy.legacy.requests.GetLocationByQueryRequest
+import com.mappy.legacy.requests.SuggestionsRequest
 import com.mappy.utils.Logger
 import com.mappy.utils.TextFormatUtil
 import com.mappy.utils.ZoomConstants

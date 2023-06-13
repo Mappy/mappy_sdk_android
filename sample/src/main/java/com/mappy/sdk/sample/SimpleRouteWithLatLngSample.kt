@@ -10,8 +10,8 @@ import com.mappy.map.MappyMapFragment
 import com.mappy.map.MappyPolyline
 import com.mappy.map.MappySection
 import com.mappy.sdk.sample.utils.ProgressDialogHelper
-import com.mappy.services.RequestListener
-import com.mappy.services.utils.MappyRouteRequestBuilder
+import com.mappy.legacy.RequestListener
+import com.mappy.legacy.utils.MappyRouteRequestBuilder
 import com.mappy.webservices.resource.model.dao.MappyMultiPathRoute
 
 class SimpleRouteWithLatLngSample : FragmentActivity() {

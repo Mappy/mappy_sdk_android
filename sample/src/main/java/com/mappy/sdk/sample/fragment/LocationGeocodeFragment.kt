@@ -15,10 +15,10 @@ import com.mappy.common.model.GeoBounds
 import com.mappy.map.MapController
 import com.mappy.sdk.sample.R
 import com.mappy.sdk.sample.utils.ProgressDialogHelper
-import com.mappy.services.MappyDownloadManager
-import com.mappy.services.RequestListener
-import com.mappy.services.requests.GetLocationByQueryRequest
-import com.mappy.services.requests.SuggestionsRequest
+import com.mappy.legacy.MappyDownloadManager
+import com.mappy.legacy.RequestListener
+import com.mappy.legacy.requests.GetLocationByQueryRequest
+import com.mappy.legacy.requests.SuggestionsRequest
 import com.mappy.utils.TextFormatUtil
 import com.mappy.webservices.resource.json.Suggestion
 import com.mappy.webservices.resource.model.dao.MappyLocation

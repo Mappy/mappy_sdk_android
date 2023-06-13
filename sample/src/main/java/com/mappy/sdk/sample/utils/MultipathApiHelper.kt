@@ -11,10 +11,10 @@ import com.mappy.map.MapController
 import com.mappy.map.MappyPolyline
 import com.mappy.map.MappySection
 import com.mappy.sdk.sample.R
-import com.mappy.services.MappyDownloadManager
-import com.mappy.services.RequestListener
-import com.mappy.services.requests.GetMultiPathRequest
-import com.mappy.services.requests.GetMultiPathTransportsRequest
+import com.mappy.legacy.MappyDownloadManager
+import com.mappy.legacy.RequestListener
+import com.mappy.legacy.requests.GetMultiPathRequest
+import com.mappy.legacy.requests.GetMultiPathTransportsRequest
 import com.mappy.utils.ConnectivityUtil
 import com.mappy.utils.Logger
 import com.mappy.webservices.resource.model.dao.MappyMultiPathRoute
