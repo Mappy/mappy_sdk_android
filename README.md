@@ -12,7 +12,7 @@ Mappy SDK is a library that provides APIs that could be shown on the map.
 
 ## Versions
 
-See [CHANGELOG](CHANGELOG)
+See [CHANGELOG](CHANGELOG.md)
 
 ## Technical considerations
 

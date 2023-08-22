@@ -9,7 +9,7 @@
 
 #Versions
 
-See [CHANGELOG](CHANGELOG)
+See [CHANGELOG](CHANGELOG.md)
 
 # What's the sample for ?
 
