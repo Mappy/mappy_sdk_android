@@ -80,7 +80,7 @@ dependencies {
 
     implementation "com.mappy:mappy-sdk:7.4.1"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation libs.kotlin
 
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
