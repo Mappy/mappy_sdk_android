@@ -10,7 +10,6 @@ import com.mappy.map.MappyMapFragment
 import com.mappy.sdk.sample.utils.MultipathApiHelper
 import com.mappy.sdk.sample.utils.ProgressDialogHelper
 import com.mappy.utils.Logger
-import io.reactivex.plugins.RxJavaPlugins
 
 class MultiPathRouteWithLatLngSample : FragmentActivity(), MultipathApiHelper.MultipathApiUser {
 
@@ -31,8 +30,6 @@ class MultiPathRouteWithLatLngSample : FragmentActivity(), MultipathApiHelper.Mu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sample_route_latlng_picker)
-
-        RxJavaPlugins.setErrorHandler { Logger.e(it) }
 
         departureSpinner = findViewById(R.id.sample_route_latlng_picker_departure)
         arrivalSpinner = findViewById(R.id.sample_route_latlng_picker_arrival)

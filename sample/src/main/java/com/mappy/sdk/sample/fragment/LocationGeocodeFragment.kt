@@ -9,26 +9,42 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ListView
+import android.widget.SimpleAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.mappy.common.model.GeoBounds
+import com.mappy.legacy.MappyDownloadManager
+import com.mappy.legacy.RequestListener
+import com.mappy.legacy.requestparams.LocationByQueryRequestParams
+import com.mappy.legacy.requestparams.SuggestionsRequestParams
 import com.mappy.map.MapController
 import com.mappy.sdk.sample.R
 import com.mappy.sdk.sample.utils.ProgressDialogHelper
-import com.mappy.legacy.MappyDownloadManager
-import com.mappy.legacy.RequestListener
-import com.mappy.legacy.requests.GetLocationByQueryRequest
-import com.mappy.legacy.requests.SuggestionsRequest
 import com.mappy.utils.TextFormatUtil
-import com.mappy.webservices.resource.json.Suggestion
+import com.mappy.webservices.resource.json.SuggestionJson
 import com.mappy.webservices.resource.model.dao.MappyLocation
 import com.mappy.webservices.resource.store.LocationStore
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.subjects.PublishSubject
-import java.util.*
-import java.util.concurrent.TimeUnit
+import com.mappy.webservices.resource.store.SuggestionStore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
+@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class LocationGeocodeFragment : Fragment() {
 
     private var departure: Boolean = false
@@ -44,10 +60,9 @@ class LocationGeocodeFragment : Fragment() {
 
     private lateinit var adapter: SimpleAdapter
     private val data = ArrayList<HashMap<String, CharSequence>>()
-    private var suggestions: List<Suggestion>? = null
-
-    private var searchSuggestionSubject: PublishSubject<String>? = null
-    private var textWatchDisposable: Disposable? = null
+    private var suggestionJsons: List<SuggestionJson>? = null
+    private var textWatchJob: Job? = null
+    private var searchSuggestionFlow: MutableSharedFlow<String> = MutableSharedFlow()
 
     interface LocationGeocodeListener {
         fun onSearchDone(location: MappyLocation, isDeparture: Boolean)
@@ -66,7 +81,7 @@ class LocationGeocodeFragment : Fragment() {
             context as LocationGeocodeListener
         }
         progressDialogHelper = ProgressDialogHelper(context)
-        createObservables(context)
+        initializeSuggestionSearchCoroutines(context)
     }
 
     override fun onDetach() {
@@ -75,12 +90,12 @@ class LocationGeocodeFragment : Fragment() {
         MappyDownloadManager.cancelSuggestionsRequest()
         listener = null
 
-        textWatchDisposable?.dispose()
+        textWatchJob?.cancel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val arguments = arguments!!
+        val arguments = requireArguments()
         departure = arguments.getBoolean(IS_DEPARTURE_KEY)
         previousText = arguments.getString(PREVIOUS_TEXT_KEY)
         geobounds = arguments.getParcelable(GEO_BOUNDS_KEY)
@@ -139,12 +154,12 @@ class LocationGeocodeFragment : Fragment() {
             progressDialogHelper.show()
 
 
-            val params = GetLocationByQueryRequest.Params(
+            val params = LocationByQueryRequestParams(
                 query,
                 geobounds ?: GeoBounds(),
                 extendsBoundingBox = true,
                 isForRoute = true,
-                filter = GetLocationByQueryRequest.POI_XOR_ADDRESS
+                filter = LocationByQueryRequestParams.POI_XOR_ADDRESS
             )
             MappyDownloadManager.getLocationByQuery(
                 params,
@@ -173,15 +188,14 @@ class LocationGeocodeFragment : Fragment() {
         })
     }
 
-    private fun createObservables(context: Context) {
-        val suggest = PublishSubject.create<String>()
-        searchSuggestionSubject = suggest
-        val observable = suggest.debounce(100, TimeUnit.MILLISECONDS)
-        textWatchDisposable = observable.flatMap { query -> launchSuggestionRequest(query) }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { this.updateSuggestions(it.suggestionList) },
-                { createObservables(context) })
+    private fun initializeSuggestionSearchCoroutines(context: Context) {
+        searchSuggestionFlow
+            .debounce(100)
+            .flatMapLatest { query -> flowOf(launchSuggestionRequest(query)) }
+            .onEach { suggestions ->
+                updateSuggestions(suggestions.suggestionJsonList)
+            }
+            .launchIn(CoroutineScope(Dispatchers.Main))
     }
 
     private fun setTextWatcher() {
@@ -200,14 +214,16 @@ class LocationGeocodeFragment : Fragment() {
                     .replace("\"".toRegex(), " ")
                     .trim { it <= ' ' }
 
-                searchSuggestionSubject?.onNext(text)
+                CoroutineScope(Dispatchers.Default).launch {
+                    searchSuggestionFlow.emit(text)
+                }
             }
         })
     }
 
     private fun setOnItemClickListener(listView: ListView) {
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            suggestions?.let {
+            suggestionJsons?.let {
                 if (it.size > position) {
                     val query = it[position].getStringLabels(",")
                     editText.setText(
@@ -219,16 +235,29 @@ class LocationGeocodeFragment : Fragment() {
         }
     }
 
-    @Synchronized
-    private fun launchSuggestionRequest(text: String) =
-        MappyDownloadManager.getSuggestions(SuggestionsRequest.Params(text))
+    private suspend fun launchSuggestionRequest(query: String): SuggestionStore {
+        return suspendCancellableCoroutine { continuation ->
+            MappyDownloadManager.getSuggestions(
+                SuggestionsRequestParams(query),
+                object : RequestListener<SuggestionStore> {
+
+                    override fun onRequestSuccess(result: SuggestionStore) {
+                        continuation.resume(result)
+                    }
+
+                    override fun onRequestFailure(throwable: Throwable) {
+                        continuation.resume(SuggestionStore())
+                    }
+                })
+        }
+    }
 
     @Synchronized
-    private fun updateSuggestions(suggestions: List<Suggestion>?) {
-        this.suggestions = suggestions
+    private fun updateSuggestions(suggestionJsons: List<SuggestionJson>?) {
+        this.suggestionJsons = suggestionJsons
         data.clear()
-        if (suggestions != null) {
-            for (suggestion in suggestions) {
+        if (suggestionJsons != null) {
+            for (suggestion in suggestionJsons) {
                 val map = HashMap<String, CharSequence>(2)
                 if (suggestion.labels.isNotEmpty()) {
                     map[FROM[0]] =

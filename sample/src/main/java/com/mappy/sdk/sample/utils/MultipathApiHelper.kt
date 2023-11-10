@@ -7,14 +7,14 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import com.mappy.common.model.LatLng
+import com.mappy.legacy.MappyDownloadManager
+import com.mappy.legacy.RequestListener
+import com.mappy.legacy.requestparams.MultiPathRequestParams
+import com.mappy.legacy.requestparams.MultiPathTransportsRequestParams
 import com.mappy.map.MapController
 import com.mappy.map.MappyPolyline
 import com.mappy.map.MappySection
 import com.mappy.sdk.sample.R
-import com.mappy.legacy.MappyDownloadManager
-import com.mappy.legacy.RequestListener
-import com.mappy.legacy.requests.GetMultiPathRequest
-import com.mappy.legacy.requests.GetMultiPathTransportsRequest
 import com.mappy.utils.ConnectivityUtil
 import com.mappy.utils.Logger
 import com.mappy.webservices.resource.model.dao.MappyMultiPathRoute
@@ -45,7 +45,7 @@ class MultipathApiHelper(val context: Context, val listener: MultipathApiUser) {
         val departure = listener.getDeparture() ?: return
         val arrival = listener.getArrival() ?: return
 
-        val params = GetMultiPathTransportsRequest.Params(
+        val params = MultiPathTransportsRequestParams(
             departure = departure,
             arrival = arrival,
             step = null,
@@ -72,7 +72,7 @@ class MultipathApiHelper(val context: Context, val listener: MultipathApiUser) {
 
     private fun showTransportsModesSlider(
         transportsStore: MultiPathTransportsStore,
-        transportParams: GetMultiPathTransportsRequest.Params
+        transportParams: MultiPathTransportsRequestParams
     ) {
         val transportModesContainer =
             listener.getTransportModesContainer().apply { removeAllViews() }
@@ -111,7 +111,7 @@ class MultipathApiHelper(val context: Context, val listener: MultipathApiUser) {
         selectedModeIcon: AppCompatImageView,
         transportQueryId: String,
         transportModeGroup: MultiPathTransportModeGroup,
-        transportParams: GetMultiPathTransportsRequest.Params
+        transportParams: MultiPathTransportsRequestParams
     ) {
         this.selectedModeIcon?.let {
             it.setColorFilter(ContextCompat.getColor(context, R.color.selector_color_grey))
@@ -127,7 +127,7 @@ class MultipathApiHelper(val context: Context, val listener: MultipathApiUser) {
     private fun getMultiPathRoute(
         sessionId: String,
         modeGroup: MultiPathTransportModeGroup,
-        transportParams: GetMultiPathTransportsRequest.Params
+        transportParams: MultiPathTransportsRequestParams
     ) {
         listener.showProgressDialog()
 
@@ -135,7 +135,7 @@ class MultipathApiHelper(val context: Context, val listener: MultipathApiUser) {
             StringBuilder("Transport mode \"").append(modeGroup.label).append("\" with provider: ")
 
         //prepare multipath request
-        val paramsBuilder = GetMultiPathRequest.Params.Builder(transportParams)
+        val paramsBuilder = MultiPathRequestParams.Builder(transportParams)
             .setMultiPathSessionId(sessionId)
             .setDepartureLabel(listener.getDepartureLabel())
             .setArrivalLabel(listener.getArrivalLabel())

@@ -84,7 +84,7 @@ Get the list of POI by query ( bounding box, text, suggestion, etc. )
       - *geoBounds*             `GeoBounds` bounding box corresponding to user map lat_min,long_min,lat_max,long_max (SW, NE)
       - *extendsBoundingBox*    `Boolean` search outside bounding box if true (default), do not search outside bounding box if false
       - *isForRoute*            `Boolean` is the answer is for multi path or not
-      - *filter*                `GetLocationByQueryRequest.FilterType` filter the result set
+      - *filter*                `LocationByQueryRequestParams.FilterType` filter the result set
          PLACES (default) -> results will be chosen between POIs and addresses
          ADDRESS -> results will be addresses only
          POI -> results will POIs only

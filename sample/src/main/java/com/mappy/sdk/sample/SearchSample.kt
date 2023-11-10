@@ -16,17 +16,16 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mappy.common.model.GeoConstants
-import com.mappy.sdk.sample.utils.AddressUtil
 import com.mappy.legacy.MappyDownloadManager
-import com.mappy.legacy.requests.GetLocationByQueryRequest
-import com.mappy.legacy.requests.SuggestionsRequest
-import com.mappy.utils.Logger
+import com.mappy.legacy.RequestListener
+import com.mappy.legacy.requestparams.LocationByQueryRequestParams
+import com.mappy.legacy.requestparams.SuggestionsRequestParams
+import com.mappy.sdk.sample.utils.AddressUtil
 import com.mappy.utils.TextFormatUtil
 import com.mappy.utils.ZoomConstants
-import com.mappy.webservices.resource.json.Suggestion
+import com.mappy.webservices.resource.json.SuggestionJson
 import com.mappy.webservices.resource.store.LocationStore
-import io.reactivex.disposables.Disposable
-import io.reactivex.plugins.RxJavaPlugins
+import com.mappy.webservices.resource.store.SuggestionStore
 
 class SearchSample : AppCompatActivity(), View.OnClickListener {
     private lateinit var input: TextView
@@ -34,25 +33,22 @@ class SearchSample : AppCompatActivity(), View.OnClickListener {
     private lateinit var result: TextView
     private val suggestionsAdapter = SuggestionAdapter(this)
 
-    private var suggestionDisposable: Disposable? = null
-    private var getLocationByQueryDisposable: Disposable? = null
     private val inputWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            dispose()
-            suggestionDisposable = MappyDownloadManager.getSuggestions(
-                SuggestionsRequest.Params(
-                    s.toString(),
-                    SuggestionsRequest.Params.Filter.all,
+            MappyDownloadManager.getSuggestions(
+                SuggestionsRequestParams(
+                    s.toString(), SuggestionsRequestParams.Filter.all,
                     GeoConstants.FRANCE,
                     ZoomConstants.COUNTRY
-                )
-            )
-                .subscribe(
-                    { suggestionsAdapter.suggestions = it.suggestionList },
-                    { dispose() },
-                    ::dispose
-                )
+                ), object : RequestListener<SuggestionStore> {
+                    override fun onRequestSuccess(result: SuggestionStore) {
+                        suggestionsAdapter.suggestionJsons = result.suggestionJsonList
+                    }
+
+                    override fun onRequestFailure(throwable: Throwable) {
+                    }
+                })
         }
 
         override fun afterTextChanged(s: Editable?) {}
@@ -62,7 +58,6 @@ class SearchSample : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sample_search)
 
-        RxJavaPlugins.setErrorHandler { Logger.e(it) }
         input = findViewById(R.id.sample_search_input)
         validate = findViewById(R.id.sample_search_validate)
         result = findViewById(R.id.sample_search_result)
@@ -92,30 +87,29 @@ class SearchSample : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        val suggestion = v.tag as Suggestion
+        val suggestionJson = v.tag as SuggestionJson
         val searchCompleteText =
-            TextFormatUtil.removeHtmlItalic(suggestion.getStringLabels(", ", false))
+            TextFormatUtil.removeHtmlItalic(suggestionJson.getStringLabels(", ", false))
 
         search(searchCompleteText)
     }
 
     private fun search(input: String) {
-        getLocationByQueryDisposable = MappyDownloadManager.getLocationByQuery(
-            GetLocationByQueryRequest.Params(
+        MappyDownloadManager.getLocationByQuery(
+            LocationByQueryRequestParams(
                 input,
                 GeoConstants.FRANCE,
                 true,
                 false
-            )
-        )
-            .subscribe(
-                ::onGetLocationByQuerySuccess,
-                {
-                    result.text = Log.getStackTraceString(it)
-                    disposeSearch()
-                },
-                ::disposeSearch
-            )
+            ), object : RequestListener<LocationStore> {
+                override fun onRequestSuccess(result: LocationStore) {
+                    onGetLocationByQuerySuccess(result)
+                }
+
+                override fun onRequestFailure(throwable: Throwable) {
+                    result.text = Log.getStackTraceString(throwable)
+                }
+            })
     }
 
     private fun onGetLocationByQuerySuccess(locationStore: LocationStore) {
@@ -141,19 +135,9 @@ class SearchSample : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun dispose() {
-        suggestionDisposable?.dispose()
-        suggestionDisposable = null
-    }
-
-    private fun disposeSearch() {
-        getLocationByQueryDisposable?.dispose()
-        getLocationByQueryDisposable = null
-    }
-
     private class SuggestionAdapter(val listener: View.OnClickListener) :
         RecyclerView.Adapter<SuggestionViewHolder>() {
-        internal var suggestions: List<Suggestion> = ArrayList()
+        internal var suggestionJsons: List<SuggestionJson> = ArrayList()
             set(suggestions) {
                 field = suggestions
                 notifyDataSetChanged()
@@ -162,11 +146,11 @@ class SearchSample : AppCompatActivity(), View.OnClickListener {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             SuggestionViewHolder(parent)
 
-        override fun getItemCount() = suggestions.size
+        override fun getItemCount() = suggestionJsons.size
 
         override fun getItemViewType(position: Int) = 1
 
-        private fun getItemAt(position: Int) = suggestions[position]
+        private fun getItemAt(position: Int) = suggestionJsons[position]
 
         override fun onBindViewHolder(holder: SuggestionViewHolder, position: Int) {
             holder.bind(getItemAt(position))
@@ -178,8 +162,8 @@ class SearchSample : AppCompatActivity(), View.OnClickListener {
         LayoutInflater.from(parent.context).inflate(R.layout.item_suggestion, parent, false)
     ) {
 
-        fun bind(suggestion: Suggestion) {
-            val labels = replaceHtmlItalicWithBold(suggestion.labels)
+        fun bind(suggestionJson: SuggestionJson) {
+            val labels = replaceHtmlItalicWithBold(suggestionJson.labels)
             val childrenCount = (itemView as ViewGroup).childCount
             for (i in labels.size until childrenCount) {
                 itemView.getChildAt(i).visibility = View.GONE
@@ -212,7 +196,7 @@ class SearchSample : AppCompatActivity(), View.OnClickListener {
                     labelTextView.text = Html.fromHtml(label)
                 }
             }
-            itemView.tag = suggestion
+            itemView.tag = suggestionJson
         }
 
         companion object {

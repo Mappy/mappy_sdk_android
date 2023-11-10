@@ -9,14 +9,14 @@ import androidx.fragment.app.FragmentActivity
 import com.mappy.common.model.GeoBounds
 import com.mappy.common.model.GeoConstants
 import com.mappy.common.model.LatLng
+import com.mappy.legacy.MappyDownloadManager
+import com.mappy.legacy.RequestListener
+import com.mappy.legacy.requestparams.LocationByCoordinatesRequestParams
+import com.mappy.legacy.requestparams.LocationByQueryRequestParams
 import com.mappy.map.MapController
 import com.mappy.map.MappyMapFragment
 import com.mappy.sdk.sample.utils.AddressUtil
 import com.mappy.sdk.sample.utils.ProgressDialogHelper
-import com.mappy.legacy.MappyDownloadManager
-import com.mappy.legacy.RequestListener
-import com.mappy.legacy.requests.GetLocationByCoordinatesRequest
-import com.mappy.legacy.requests.GetLocationByQueryRequest
 import com.mappy.utils.ConnectivityUtil
 import com.mappy.webservices.resource.model.dao.MappyLocation
 import com.mappy.webservices.resource.store.LocationStore
@@ -36,7 +36,7 @@ class GeocodeSample : FragmentActivity(), View.OnClickListener,
     private lateinit var resultCoordinates: TextView
 
     /**
-     * same listener for both [GetLocationByQueryRequest] and [GetLocationByCoordinatesRequest]
+     * same listener for both LocationByQuery Request and LocationByCoordinates Request
      */
     private lateinit var requestListener: RequestListener<LocationStore>
 
@@ -98,19 +98,19 @@ class GeocodeSample : FragmentActivity(), View.OnClickListener,
     override fun onClick(view: View) {
         prepareResult()
         val queriedAddress = addressInput.text.toString()
-        val params = GetLocationByQueryRequest.Params(
+        val params = LocationByQueryRequestParams(
             queriedAddress,
             mapController.boundingBox ?: GeoBounds(),
             extendsBoundingBox = true,
             isForRoute = false,
-            filter = GetLocationByQueryRequest.ADDRESS
+            filter = LocationByQueryRequestParams.ADDRESS
         )
         MappyDownloadManager.getLocationByQuery(params, requestListener)
     }
 
     override fun onMapLongClick(point: LatLng): Boolean {
         prepareResult()
-        val params = GetLocationByCoordinatesRequest.Params(point)
+        val params = LocationByCoordinatesRequestParams(point)
         MappyDownloadManager.getLocationByCoordinatesWithPanoramicId(params, requestListener)
         return true
     }
